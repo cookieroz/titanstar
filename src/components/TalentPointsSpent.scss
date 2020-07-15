@@ -1,0 +1,19 @@
+.talent-points {
+  align-items: center;
+  background-color: #06090A;
+  border: 1px solid #1C1F20;
+  display: flex;
+  flex-flow: column;
+  font-size: 1.15rem;
+  justify-content: center;
+  line-height: 1.15em;
+  padding: 1.25em 2em;
+
+  &__points-spent {
+    letter-spacing: 4px;
+  }
+
+  &__points-spent-text {
+    color: #3F5872;
+  }
+}
