@@ -1,0 +1,68 @@
+.talent-calculator {
+  background: #080C10 url('../assets/images/talent-calc-bg.png') repeat;
+  left: 50%;
+  max-width: 900px;
+  padding: 1em 2em;
+  position: absolute;
+  top: 20%;
+  transform: translate(-50%, -20%);
+  width: 90%;
+
+  &__title {
+    background-color: #171A1B;
+    color: #ffffff;
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  &__content {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 4em 0 0 0;
+  }
+
+  &__path-wrapper {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 2em 0 0 0;
+
+    &:first-child {
+      padding: 0;
+    }
+  }
+
+  &__path-title {
+    font-size: 0.75em;
+    text-transform: uppercase;
+  }
+
+  &__points {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 0.25em 1em;
+    text-align: center;
+  }
+
+  @media only screen and (max-width: 42rem) {
+    padding: 1rem;
+    top: 5%;
+    transform: translate(-50%, -5%);
+    width: 94%;
+
+    &__content {
+      flex-flow: column-reverse;
+      margin-top: 1rem;
+    }
+
+    &__path-title {
+      text-align: center;
+    }
+
+    &__points {
+      margin-bottom: 2rem;
+    }
+  }
+}

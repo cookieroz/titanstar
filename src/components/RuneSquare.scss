@@ -1,0 +1,58 @@
+.rune-square {
+  background-image: url('../assets/images/talent-icons-sprite.png');
+  background-position-y: 50px;
+  border: 4px solid #4F4F4F;
+  height: 50px;
+  pointer-events: none;
+  width: 50px;
+
+  &--selectable,
+  &--selected {
+    pointer-events: auto;
+  }
+
+  &--selectable:hover,
+  &--selected {
+    background-position-y: 0;
+  }
+
+  &--selected {
+    border-color: #6BA2D8;
+  }
+
+  &--selectable {
+    cursor: pointer;
+  }
+
+  &__blocks {
+    background-position-x: 0;
+  }
+
+  &__meal {
+    background-position-x: 50px;
+  }
+
+  &__cake {
+    background-position-x: 100px;
+  }
+
+  &__crown {
+    background-position-x: 150px;
+  }
+
+  &__ship {
+    background-position-x: 200px;
+  }
+
+  &__gear {
+    background-position-x: 250px;
+  }
+
+  &__lightening {
+    background-position-x: 300px;
+  }
+
+  &__skull {
+    background-position-x: 350px;
+  }
+}
