@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import RuneSquare from './RuneSquare';
 import './RunePath.scss';
 
-export default function RunePath({ runeTypes, talentPoints, updateTalentPoints }) {
-  const [hasPoints, setHasPoints] = useState(talentPoints > 0 );
+export default function RunePath({ runeTypes, spentPoints, talentPoints, updateSpentPoints }) {
+  const [hasPoints, setHasPoints] = useState(spentPoints < talentPoints );
 
   function initPath() {
     const createdPath = {};
@@ -30,14 +30,21 @@ export default function RunePath({ runeTypes, talentPoints, updateTalentPoints }
     return previousRune ? previousRune.isSelected && hasPoints : hasPoints
   }
 
+  function setListItemClass(rune) {
+    const previousRune = getPreviousRune(rune);
+    const shouldHaveHighlight = previousRune ? previousRune.isSelected && !rune.isSelected : false;
+    return shouldHaveHighlight ? 'rune-path__rune--highlight' : '';
+  }
+
   function updateRunes(updatedRune = null) {
-    const tempPath = updatedRune ? { ...path } : { ...path, updatedRune };
+    if (!path || runeTypes) { return; }
+    const tempPath = updatedRune ? { ...path, updatedRune } : { ...path };
     runeTypes.forEach((type) => {
       let rune = tempPath[type]
       rune.ableToSelect = isAbleToSelect(rune)
       rune.highlightClass = setListItemClass(rune)
     });
-    setPath(tempPath);
+    setPath({ ...tempPath });
   }
 
   function checkIfRuneIsSelectable(rune) {
@@ -45,17 +52,11 @@ export default function RunePath({ runeTypes, talentPoints, updateTalentPoints }
     return previousRune ? previousRune.isSelected && !rune.isSelected && hasPoints : !rune.isSelected && hasPoints;
   }
 
-  function setListItemClass(rune) {
-    const previousRune = getPreviousRune(rune);
-    const shouldHaveHighlight = previousRune ? previousRune.isSelected && rune.isSelected : false;
-    return shouldHaveHighlight ? 'rune-path__rune--highlight' : '';
-  }
-
   function deselectRune(event, runeType) {
     event.preventDefault();
     let rune = path[runeType];
     if (rune.isSelected) {
-      talentPoints < 6 && updateTalentPoints('increment');
+      spentPoints > 0 && updateSpentPoints('decrement');
       rune.isSelected = false;
       updateRunes(rune);
     }
@@ -65,13 +66,13 @@ export default function RunePath({ runeTypes, talentPoints, updateTalentPoints }
     let rune = path[runeType];
     const shouldUpdate = checkIfRuneIsSelectable(rune);
     if (shouldUpdate) {
-      updateTalentPoints('decrement');
+      spentPoints < talentPoints && updateSpentPoints('increment');
       rune.isSelected = true;
       updateRunes(rune);
     }
   }
 
-  useEffect(() => setHasPoints(talentPoints > 0), [talentPoints]);
+  useEffect(() => setHasPoints(spentPoints < talentPoints), [spentPoints, talentPoints]);
 
   return (
     <ul className="rune-path">
@@ -97,6 +98,7 @@ export default function RunePath({ runeTypes, talentPoints, updateTalentPoints }
 
 RunePath.propTypes = {
   runeTypes: PropTypes.array,
+  spentPoints: PropTypes.number,
   talentPoints: PropTypes.number,
-  updateTalentPoints: PropTypes.func,
+  updateSpentPoints: PropTypes.func,
 };

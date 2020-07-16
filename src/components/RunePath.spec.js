@@ -6,8 +6,8 @@ describe('RunePath component', () => {
   let runeTypes = ['blocks', 'meal', 'cake', 'crown'];
   let wrapper;
 
-  const factory = (talentPoints = 6) => {
-    return mount(<RunePath runeTypes={runeTypes} talentPoints={talentPoints} updateTalentPoints={jest.fn()} />)
+  const factory = (spentPoints = 0) => {
+    return mount(<RunePath runeTypes={runeTypes} spentPoints={spentPoints} talentPoints={6} updateSpentPoints={jest.fn()} />)
   }
 
   it("renders", () => {

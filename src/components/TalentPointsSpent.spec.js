@@ -15,7 +15,7 @@ describe('TalentPointsSpent component', () => {
   });
 
   it('it displays talentPoints', () => {
-    wrapper = mount(<TalentPointsSpent talentPoints={4} />);
-    expect(wrapper.find('.talent-points__points-spent').text()).toBe('4/6');
+    wrapper = mount(<TalentPointsSpent spentPoints={2} talentPoints={6} />);
+    expect(wrapper.find('.talent-points__points-spent').text()).toBe('2/6');
   });
 });

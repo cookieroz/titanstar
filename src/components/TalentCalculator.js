@@ -4,16 +4,17 @@ import TalentPointsSpent from './TalentPointsSpent';
 import './TalentCalculator.scss';
 
 export default function TalentCalculator() {
-  const [talentPoints, setTalentPoints] = useState(6);
+  const talentPoints = 6;
+  const [spentPoints, setSpentPoints] = useState(0);
 
-  const updateTalentPoints = (updateType) => {
-    let updatedTalentPoints = talentPoints
+  const updateSpentPoints = (updateType) => {
+    let updatedSpentPoints = spentPoints
     switch (updateType) {
       case 'increment':
-        if (talentPoints < 6) { setTalentPoints(updatedTalentPoints + 1); }
+        if (spentPoints < 6) { setSpentPoints(updatedSpentPoints + 1); }
         break;
       case 'decrement':
-        if (talentPoints > 0) { setTalentPoints(updatedTalentPoints - 1); }
+        if (spentPoints > 0) { setSpentPoints(updatedSpentPoints - 1); }
         break;
       default:
         return;
@@ -41,15 +42,16 @@ export default function TalentCalculator() {
                 <TalentPath
                   key={`path-${index}`}
                   runeTypes={pathRunes}
+                  spentPoints={spentPoints}
                   talentPoints={talentPoints}
-                  updateTalentPoints={updateTalentPoints}
+                  updateSpentPoints={updateSpentPoints}
                 />
               </div>
             )
           })}
         </section>
         <aside className="talent-calculator__points">
-          <TalentPointsSpent talentPoints={talentPoints} />
+          <TalentPointsSpent spentPoints={spentPoints} talentPoints={talentPoints} />
         </aside>
       </section>
     </div>
